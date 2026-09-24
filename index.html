@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartLearn | Smart Learning Platform</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #7c3aed;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            background: #2563eb;
+            color: white !important;
+            border-radius: 8px;
+        }
+
+        .register-btn {
+            padding: 10px 20px;
+            background: #7c3aed;
+            color: white !important;
+            border-radius: 8px;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 7% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            background: linear-gradient(135deg, #eef4ff, #f8f1ff);
+        }
+
+        .hero-text {
+            width: 55%;
+            animation: slideLeft 1s ease;
+        }
+
+        .hero-text h1 {
+            font-size: 55px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: #2563eb;
+        }
+
+        .typing {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #596579;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(37,99,235,0.2);
+        }
+
+        .hero-image {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-card {
+            width: 330px;
+            height: 330px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 130px;
+            box-shadow: 0 25px 60px rgba(37,99,235,0.3);
+        }
+
+        /* STATS */
+
+        .stats {
+            padding: 70px 7%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            background: white;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 18px;
+            background: #f8faff;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .stat-card h2 {
+            font-size: 38px;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            color: #64748b;
+        }
+
+        /* SECTION */
+
+        section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        /* FEATURE CARDS */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* COURSES */
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: 0.4s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .course-top {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .course-content p {
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .course-link {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* AI */
+
+        .ai-section {
+            background: linear-gradient(135deg, #172554, #4c1d95);
+            color: white;
+            border-radius: 30px;
+            margin: 40px 7%;
+            padding: 70px;
+            text-align: center;
+        }
+
+        .ai-section h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .ai-section p {
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.7;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* PROGRESS */
+
+        .progress-section {
+            background: white;
+        }
+
+        .progress-box {
+            max-width: 850px;
+            margin: auto;
+            background: #f8faff;
+            padding: 35px;
+            border-radius: 20px;
+        }
+
+        .progress-item {
+            margin-bottom: 25px;
+        }
+
+        .progress-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            animation: progressLoad 2s ease;
+        }
+
+        /* ACHIEVEMENT */
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            transition: 0.3s;
+        }
+
+        .achievement-card:hover {
+            transform: scale(1.05);
+        }
+
+        .achievement-card .badge {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .achievement-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .achievement-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* TESTIMONIAL */
+
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .review-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .review-card h4 {
+            color: #172033;
+        }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 60px 7% 25px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-content p,
+        .footer-content a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 20px;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%,100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes progressLoad {
+            from {
+                width: 0;
+            }
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text,
+            .hero-image {
+                width: 100%;
+            }
+
+            .hero-text h1 {
+                font-size: 42px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .features,
+            .courses,
+            .reviews {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ai-section {
+                margin: 20px;
+                padding: 50px 25px;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                width: 250px;
+                height: 250px;
+                font-size: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        Smart<span>Learn</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="courses.html">Courses</a>
+
+        <a href="#features">Features</a>
+
+        <a href="#ai">AI Tutor</a>
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="login.html" class="login-btn">Login</a>
+
+        <a href="register.html" class="register-btn">Register</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+            Learn Smarter.<br>
+            Grow <span>Faster.</span>
+        </h1>
+
+        <p>
+            Welcome to SmartLearn — a modern learning platform
+            designed to help students learn, practice, track progress
+            and achieve their goals.
+        </p>
+
+        <h2>
+            <span class="typing"></span>
+        </h2>
+
+        <br>
+
+        <div class="hero-buttons">
+
+            <a href="courses.html" class="primary-btn">
+                Explore Courses →
+            </a>
+
+            <a href="ai-tutor.html" class="secondary-btn">
+                🤖 Try AI Tutor
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <div class="hero-card">
+            🎓
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat-card">
+        <h2 class="counter" data-target="50">0</h2>
+        <p>Courses</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 class="counter" data-target="1000">0</h2>
+        <p>Students</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 class="counter" data-target="500">0</h2>
+        <p>Quizzes</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 class="counter" data-target="95">0</h2>
+        <p>Success Rate %</p>
+    </div>
+
+</div>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+    <div class="section-title">
+
+        <h2>Everything You Need to Learn</h2>
+
+        <p>
+            SmartLearn brings your complete learning journey into one place.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📚</div>
+
+            <h3>Interactive Courses</h3>
+
+            <p>
+                Explore structured courses and learn topics
+                step-by-step with easy lessons.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📝</div>
+
+            <h3>Smart Quizzes</h3>
+
+            <p>
+                Test your knowledge with quizzes and
+                instantly see your score.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🤖</div>
+
+            <h3>AI Tutor</h3>
+
+            <p>
+                Ask questions and get instant learning
+                assistance from your AI Tutor.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📊</div>
+
+            <h3>Progress Tracking</h3>
+
+            <p>
+                Track course completion, quiz performance
+                and learning progress.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🏆</div>
+
+            <h3>Achievements</h3>
+
+            <p>
+                Complete challenges, unlock badges and
+                build your learning streak.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🎓</div>
+
+            <h3>Certificates</h3>
+
+            <p>
+                Complete courses and earn certificates
+                to showcase your achievement.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURED COURSES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Featured Courses</h2>
+
+        <p>
+            Start learning with our popular courses.
+        </p>
+
+    </div>
+
+
+    <div class="courses">
+
+        <div class="course-card">
+
+            <div class="course-top">
+                💻
+            </div>
+
+            <div class="course-content">
+
+                <h3>HTML & CSS</h3>
+
+                <p>
+                    Learn the fundamentals of web development
+                    and create beautiful websites.
+                </p>
+
+                <a href="courses.html" class="course-link">
+                    View Course →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="course-card">
+
+            <div class="course-top">
+                🐍
+            </div>
+
+            <div class="course-content">
+
+                <h3>Python Programming</h3>
+
+                <p>
+                    Learn Python from the basics and build
+                    useful programming projects.
+                </p>
+
+                <a href="courses.html" class="course-link">
+                    View Course →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="course-card">
+
+            <div class="course-top">
+                ⚡
+            </div>
+
+            <div class="course-content">
+
+                <h3>JavaScript</h3>
+
+                <p>
+                    Learn JavaScript and make your websites
+                    interactive and dynamic.
+                </p>
+
+                <a href="courses.html" class="course-link">
+                    View Course →
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AI TUTOR -->
+
+<section id="ai">
+
+    <div class="ai-section">
+
+        <h2>🤖 Meet Your AI Tutor</h2>
+
+        <p>
+            Stuck on a difficult topic?
+            Ask SmartLearn AI Tutor and get instant explanations,
+            examples and learning assistance.
+        </p>
+
+        <a href="ai-tutor.html" class="primary-btn">
+            Start AI Tutor →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PROGRESS -->
+
+<section class="progress-section">
+
+    <div class="section-title">
+
+        <h2>Track Your Learning</h2>
+
+        <p>
+            SmartLearn helps you understand how far you have progressed.
+        </p>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <div class="progress-item">
+
+            <div class="progress-header">
+
+                <span>HTML & CSS</span>
+
+                <span>80%</span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill" style="width:80%"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-item">
+
+            <div class="progress-header">
+
+                <span>Python</span>
+
+                <span>65%</span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill" style="width:65%"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-item">
+
+            <div class="progress-header">
+
+                <span>JavaScript</span>
+
+                <span>45%</span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill" style="width:45%"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Earn Amazing Achievements</h2>
+
+        <p>
+            Keep learning and unlock new badges.
+        </p>
+
+    </div>
+
+
+    <div class="achievements">
+
+        <div class="achievement-card">
+
+            <div class="badge">🔥</div>
+
+            <h3>7 Day Streak</h3>
+
+            <p>Learn for 7 consecutive days.</p>
+
+        </div>
+
+
+        <div class="achievement-card">
+
+            <div class="badge">🏆</div>
+
+            <h3>Quiz Master</h3>
+
+            <p>Complete multiple quizzes.</p>
+
+        </div>
+
+
+        <div class="achievement-card">
+
+            <div class="badge">🎓</div>
+
+            <h3>Course Finisher</h3>
+
+            <p>Complete your first course.</p>
+
+        </div>
+
+
+        <div class="achievement-card">
+
+            <div class="badge">⭐</div>
+
+            <h3>Top Learner</h3>
+
+            <p>Reach the leaderboard.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REVIEWS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>What Students Say</h2>
+
+        <p>
+            Learning becomes easier with SmartLearn.
+        </p>
+
+    </div>
+
+
+    <div class="reviews">
+
+        <div class="review-card">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
+                SmartLearn makes learning programming
+                simple and enjoyable.
+            </p>
+
+            <h4>Student</h4>
+
+        </div>
+
+
+        <div class="review-card">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
+                The quiz and progress system helped me
+                understand my weak areas.
+            </p>
+
+            <h4>Student</h4>
+
+        </div>
+
+
+        <div class="review-card">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
+                The AI Tutor is a very useful feature
+                when I get stuck.
+            </p>
+
+            <h4>Student</h4>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Ready to Start Learning?</h2>
+
+    <p>
+        Join SmartLearn and start building your skills today.
+    </p>
+
+    <a href="register.html" class="primary-btn">
+        Get Started →
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <h3>SmartLearn</h3>
+
+            <p>
+                Smart education platform for students
+                to learn, practice and grow.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Platform</h3>
+
+            <p>
+                <a href="courses.html">Courses</a>
+            </p>
+
+            <p>
+                <a href="dashboard.html">Dashboard</a>
+            </p>
+
+            <p>
+                <a href="quiz.html">Quiz</a>
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Learning</h3>
+
+            <p>
+                <a href="ai-tutor.html">AI Tutor</a>
+            </p>
+
+            <p>
+                <a href="achievements.html">Achievements</a>
+            </p>
+
+            <p>
+                <a href="leaderboard.html">Leaderboard</a>
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Account</h3>
+
+            <p>
+                <a href="login.html">Login</a>
+            </p>
+
+            <p>
+                <a href="register.html">Register</a>
+            </p>
+
+            <p>
+                <a href="profile.html">Profile</a>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 SmartLearn. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    /* TYPING ANIMATION */
+
+    const words = [
+        "Learn Programming",
+        "Build Your Skills",
+        "Practice With Quizzes",
+        "Learn With AI",
+        "Achieve Your Goals"
+    ];
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    const typingElement = document.querySelector(".typing");
+
+    function typeEffect() {
+
+        const currentWord = words[wordIndex];
+
+        if (!deleting) {
+
+            typingElement.textContent =
+                currentWord.substring(0, charIndex + 1);
+
+            charIndex++;
+
+            if (charIndex === currentWord.length) {
+
+                deleting = true;
+
+                setTimeout(typeEffect, 1500);
+
+                return;
+            }
+
+        } else {
+
+            typingElement.textContent =
+                currentWord.substring(0, charIndex - 1);
+
+            charIndex--;
+
+            if (charIndex === 0) {
+
+                deleting = false;
+
+                wordIndex++;
+
+                if (wordIndex >= words.length) {
+                    wordIndex = 0;
+                }
+
+            }
+
+        }
+
+        setTimeout(typeEffect, deleting ? 60 : 100);
+    }
+
+    typeEffect();
+
+
+    /* COUNTER ANIMATION */
+
+    const counters = document.querySelectorAll(".counter");
+
+    counters.forEach(counter => {
+
+        const target = Number(counter.dataset.target);
+
+        let current = 0;
+
+        const increment = Math.max(1, Math.ceil(target / 80));
+
+        function updateCounter() {
+
+            current += increment;
+
+            if (current >= target) {
+
+                counter.textContent = target + "+";
+
+                return;
+
+            }
+
+            counter.textContent = current;
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        updateCounter();
+
+    });
+
+
+    /* SCROLL REVEAL */
+
+    const cards = document.querySelectorAll(
+        ".feature-card, .course-card, .achievement-card, .review-card, .stat-card"
+    );
+
+    const observer = new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.style.opacity = "1";
+
+                    entry.target.style.transform =
+                        "translateY(0)";
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+    cards.forEach(card => {
+
+        card.style.opacity = "0";
+
+        card.style.transform = "translateY(30px)";
+
+        card.style.transition =
+            "opacity 0.7s ease, transform 0.7s ease";
+
+        observer.observe(card);
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>SmartLearn - Course Management</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            color: white;
+            padding: 45px 7%;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        /* =========================
+           ADD COURSE BOX
+        ========================= */
+
+        .add-course {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.07);
+
+            margin-bottom: 35px;
+        }
+
+        .add-course h2 {
+            margin-bottom: 22px;
+            color: #111827;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .button-row {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-btn,
+        .save-btn,
+        .cancel-btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .save-btn {
+            background: #16a34a;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #15803d;
+        }
+
+        .cancel-btn {
+            background: #6b7280;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #4b5563;
+        }
+
+        /* =========================
+           COURSE LIST
+        ========================= */
+
+        .section-title {
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .course-card {
+            background: white;
+            padding: 23px;
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.10
+                );
+        }
+
+        .course-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .category {
+            display: inline-block;
+
+            background: #eff6ff;
+            color: #2563eb;
+
+            padding: 5px 11px;
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .course-card h3 {
+            font-size: 20px;
+            margin-bottom: 9px;
+        }
+
+        .course-card p {
+            color: #6b7280;
+            line-height: 1.5;
+            min-height: 48px;
+            margin-bottom: 18px;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 9px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 9px 14px;
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit-btn {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .edit-btn:hover {
+            background: #bfdbfe;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        /* =========================
+           EMPTY MESSAGE
+        ========================= */
+
+        .empty-message {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: #6b7280;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.06);
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-btn {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 11px 20px;
+
+            background: #111827;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #000;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            margin-top: 45px;
+
+            background: #111827;
+            color: white;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .course-list {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-list {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            🎓 SmartLearn Admin
+        </div>
+
+        <div>
+
+            <a href="admin.html">
+                Admin
+            </a>
+
+            <a href="students.html">
+                Students
+            </a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <h1>
+            📚 Course Management
+        </h1>
+
+        <p>
+            Add, edit, delete and manage SmartLearn courses.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <div class="container">
+
+
+        <!-- ADD / EDIT COURSE -->
+
+        <div class="add-course">
+
+            <h2 id="formTitle">
+                ➕ Add New Course
+            </h2>
+
+
+            <div class="form-grid">
+
+                <input
+                    type="text"
+                    id="courseName"
+                    placeholder="Course Name">
+
+
+                <input
+                    type="text"
+                    id="courseDescription"
+                    placeholder="Course Description">
+
+
+                <select id="courseCategory">
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Programming">
+                        Programming
+                    </option>
+
+                    <option value="Database">
+                        Database
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="text"
+                    id="courseIcon"
+                    placeholder="Course Emoji e.g. 💻">
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button
+                    class="add-btn"
+                    id="addButton"
+                    onclick="addCourse()">
+
+                    ➕ Add Course
+
+                </button>
+
+
+                <button
+                    class="save-btn"
+                    id="saveButton"
+                    onclick="updateCourse()"
+                    style="display:none;">
+
+                    💾 Save Changes
+
+                </button>
+
+
+                <button
+                    class="cancel-btn"
+                    id="cancelButton"
+                    onclick="cancelEdit()"
+                    style="display:none;">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- COURSE LIST -->
+
+        <h2 class="section-title">
+            📖 All Courses
+        </h2>
+
+
+        <div
+            class="course-list"
+            id="courseList">
+
+        </div>
+
+
+        <a
+            href="admin.html"
+            class="back-btn">
+
+            ← Back to Admin
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 SmartLearn | Course Management
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        // ==================================
+        // DEFAULT COURSES
+        // ==================================
+
+        const defaultCourses = [
+
+            {
+                name: "HTML & CSS",
+
+                description:
+                    "Learn the fundamentals of webpage structure and design.",
+
+                category:
+                    "Web Development",
+
+                icon:
+                    "🌐"
+            },
+
+
+            {
+                name: "JavaScript",
+
+                description:
+                    "Learn JavaScript and make websites interactive.",
+
+                category:
+                    "Web Development",
+
+                icon:
+                    "⚡"
+            },
+
+
+            {
+                name: "Python Programming",
+
+                description:
+                    "Learn Python programming from beginner level.",
+
+                category:
+                    "Programming",
+
+                icon:
+                    "🐍"
+            },
+
+
+            {
+                name: "C++ Programming",
+
+                description:
+                    "Learn object-oriented programming with C++.",
+
+                category:
+                    "Programming",
+
+                icon:
+                    "💻"
+            },
+
+
+            {
+                name: "React Development",
+
+                description:
+                    "Build modern interactive interfaces using React.",
+
+                category:
+                    "Web Development",
+
+                icon:
+                    "⚛️"
+            },
+
+
+            {
+                name: "Database & SQL",
+
+                description:
+                    "Learn databases, SQL queries and data management.",
+
+                category:
+                    "Database",
+
+                icon:
+                    "🗄️"
+            }
+
+        ];
+
+
+        // ==================================
+        // LOAD COURSES FROM LOCAL STORAGE
+        // ==================================
+
+        let courses =
+            JSON.parse(
+                localStorage.getItem(
+                    "smartLearnCourses"
+                )
+            );
+
+
+        if (!courses) {
+
+            courses =
+                defaultCourses;
+
+            saveCourses();
+
+        }
+
+
+        // ==================================
+        // EDIT INDEX
+        // ==================================
+
+        let editingIndex = -1;
+
+
+        // ==================================
+        // SAVE COURSES
+        // ==================================
+
+        function saveCourses() {
+
+            localStorage.setItem(
+                "smartLearnCourses",
+                JSON.stringify(courses)
+            );
+
+        }
+
+
+        // ==================================
+        // DISPLAY COURSES
+        // ==================================
+
+        function displayCourses() {
+
+            const courseList =
+                document.getElementById(
+                    "courseList"
+                );
+
+
+            courseList.innerHTML = "";
+
+
+            if (courses.length === 0) {
+
+                courseList.innerHTML = `
+
+                    <div class="empty-message">
+
+                        <h3>
+                            No courses available
+                        </h3>
+
+                        <p>
+                            Add a new course to get started.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            courses.forEach(
+                function(course, index) {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "course-card";
+
+
+                    card.innerHTML = `
+
+                        <div class="course-icon">
+                            ${course.icon}
+                        </div>
+
+                        <span class="category">
+                            ${course.category}
+                        </span>
+
+                        <h3>
+                            ${course.name}
+                        </h3>
+
+                        <p>
+                            ${course.description}
+                        </p>
+
+                        <div class="card-buttons">
+
+                            <button
+                                class="edit-btn"
+                                onclick="editCourse(${index})">
+
+                                ✏️ Edit
+
+                            </button>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteCourse(${index})">
+
+                                🗑️ Delete
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    courseList.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+        // ==================================
+        // ADD COURSE
+        // ==================================
+
+        function addCourse() {
+
+            const name =
+                document.getElementById(
+                    "courseName"
+                ).value.trim();
+
+
+            const description =
+                document.getElementById(
+                    "courseDescription"
+                ).value.trim();
+
+
+            const category =
+                document.getElementById(
+                    "courseCategory"
+                ).value;
+
+
+            const icon =
+                document.getElementById(
+                    "courseIcon"
+                ).value.trim();
+
+
+            if (
+                name === "" ||
+                description === "" ||
+                category === "" ||
+                icon === ""
+            ) {
+
+                alert(
+                    "Please fill all course details!"
+                );
+
+                return;
+
+            }
+
+
+            const newCourse = {
+
+                name:
+                    name,
+
+                description:
+                    description,
+
+                category:
+                    category,
+
+                icon:
+                    icon
+
+            };
+
+
+            courses.push(
+                newCourse
+            );
+
+
+            // SAVE
+
+            saveCourses();
+
+
+            // REFRESH DISPLAY
+
+            displayCourses();
+
+
+            // CLEAR FORM
+
+            clearForm();
+
+
+            alert(
+                "Course added successfully! 🎉"
+            );
+
+        }
+
+
+        // ==================================
+        // EDIT COURSE
+        // ==================================
+
+        function editCourse(index) {
+
+            const course =
+                courses[index];
+
+
+            editingIndex =
+                index;
+
+
+            document.getElementById(
+                "courseName"
+            ).value =
+                course.name;
+
+
+            document.getElementById(
+                "courseDescription"
+            ).value =
+                course.description;
+
+
+            document.getElementById(
+                "courseCategory"
+            ).value =
+                course.category;
+
+
+            document.getElementById(
+                "courseIcon"
+            ).value =
+                course.icon;
+
+
+            // CHANGE FORM TITLE
+
+            document.getElementById(
+                "formTitle"
+            ).innerHTML =
+                "✏️ Edit Course";
+
+
+            // HIDE ADD BUTTON
+
+            document.getElementById(
+                "addButton"
+            ).style.display =
+                "none";
+
+
+            // SHOW SAVE BUTTON
+
+            document.getElementById(
+                "saveButton"
+            ).style.display =
+                "inline-block";
+
+
+            // SHOW CANCEL BUTTON
+
+            document.getElementById(
+                "cancelButton"
+            ).style.display =
+                "inline-block";
+
+
+            // SCROLL TO FORM
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+        // ==================================
+        // UPDATE COURSE
+        // ==================================
+
+        function updateCourse() {
+
+            if (editingIndex === -1) {
+
+                return;
+
+            }
+
+
+            const name =
+                document.getElementById(
+                    "courseName"
+                ).value.trim();
+
+
+            const description =
+                document.getElementById(
+                    "courseDescription"
+                ).value.trim();
+
+
+            const category =
+                document.getElementById(
+                    "courseCategory"
+                ).value;
+
+
+            const icon =
+                document.getElementById(
+                    "courseIcon"
+                ).value.trim();
+
+
+            if (
+                name === "" ||
+                description === "" ||
+                category === "" ||
+                icon === ""
+            ) {
+
+                alert(
+                    "Please fill all course details!"
+                );
+
+                return;
+
+            }
+
+
+            courses[editingIndex] = {
+
+                name:
+                    name,
+
+                description:
+                    description,
+
+                category:
+                    category,
+
+                icon:
+                    icon
+
+            };
+
+
+            // SAVE UPDATED COURSE
+
+            saveCourses();
+
+
+            // DISPLAY AGAIN
+
+            displayCourses();
+
+
+            // RESET EDIT MODE
+
+            cancelEdit();
+
+
+            alert(
+                "Course updated successfully! ✅"
+            );
+
+        }
+
+
+        // ==================================
+        // DELETE COURSE
+        // ==================================
+
+        function deleteCourse(index) {
+
+            const course =
+                courses[index];
+
+
+            const confirmDelete =
+                confirm(
+                    "Delete " +
+                    course.name +
+                    "?"
+                );
+
+
+            if (!confirmDelete) {
+
+                return;
+
+            }
+
+
+            courses.splice(
+                index,
+                1
+            );
+
+
+            // SAVE AFTER DELETE
+
+            saveCourses();
+
+
+            // DISPLAY AGAIN
+
+            displayCourses();
+
+
+            alert(
+                "Course deleted successfully! 🗑️"
+            );
+
+        }
+
+
+        // ==================================
+        // CANCEL EDIT
+        // ==================================
+
+        function cancelEdit() {
+
+            editingIndex =
+                -1;
+
+
+            clearForm();
+
+
+            document.getElementById(
+                "formTitle"
+            ).innerHTML =
+                "➕ Add New Course";
+
+
+            document.getElementById(
+                "addButton"
+            ).style.display =
+                "inline-block";
+
+
+            document.getElementById(
+                "saveButton"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "cancelButton"
+            ).style.display =
+                "none";
+
+        }
+
+
+        // ==================================
+        // CLEAR FORM
+        // ==================================
+
+        function clearForm() {
+
+            document.getElementById(
+                "courseName"
+            ).value = "";
+
+
+            document.getElementById(
+                "courseDescription"
+            ).value = "";
+
+
+            document.getElementById(
+                "courseCategory"
+            ).value = "";
+
+
+            document.getElementById(
+                "courseIcon"
+            ).value = "";
+
+        }
+
+
+        // ==================================
+        // INITIAL DISPLAY
+        // ==================================
+
+        displayCourses();
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmartLearn | Lesson</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f8fc;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 7%;
+
+            background: white;
+
+            box-shadow:
+                0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #7c3aed;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .login-btn {
+            background: #2563eb;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        /* PAGE */
+
+        .page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 25px;
+        }
+
+        /* TOP */
+
+        .lesson-top {
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef4ff,
+                    #f5efff
+                );
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            margin-bottom: 25px;
+
+            animation: fadeDown 0.7s ease;
+        }
+
+        .course-name {
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .lesson-top h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .lesson-top p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* PROGRESS */
+
+        .progress-card {
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 16px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.05);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+
+            font-size: 14px;
+
+            color: #64748b;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+
+            background: #e5e7eb;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            border-radius: 20px;
+
+            transition: width 0.7s ease;
+        }
+
+        /* CONTENT */
+
+        .lesson-content {
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.06);
+
+            animation: fadeUp 0.8s ease;
+        }
+
+        .lesson-content h2 {
+            margin-bottom: 18px;
+            font-size: 28px;
+        }
+
+        .lesson-content h3 {
+            margin-top: 30px;
+            margin-bottom: 12px;
+            color: #2563eb;
+        }
+
+        .lesson-content p {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .lesson-content ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .lesson-content li {
+            color: #475569;
+            line-height: 2;
+        }
+
+        .info-box {
+            padding: 20px;
+
+            background: #eff6ff;
+
+            border-left: 5px solid #2563eb;
+
+            border-radius: 10px;
+
+            margin: 25px 0;
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        /* ACTION */
+
+        .complete-area {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #f8faff;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+        .complete-btn {
+            border: none;
+
+            padding: 14px 25px;
+
+            background: #16a34a;
+
+            color: white;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .complete-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 20px rgba(22,163,74,0.2);
+        }
+
+        .complete-btn.completed {
+            background: #64748b;
+            cursor: default;
+        }
+
+        /* NAVIGATION */
+
+        .lesson-navigation {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+        .nav-btn {
+            border: none;
+
+            padding: 13px 20px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .prev-btn {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* MESSAGE */
+
+        .message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+        }
+
+        .success {
+            display: block;
+
+            background: #dcfce7;
+
+            color: #166534;
+        }
+
+        /* COMPLETION */
+
+        .completion-screen {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(15,23,42,0.75);
+
+            z-index: 2000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .completion-box {
+
+            background: white;
+
+            max-width: 450px;
+
+            width: 100%;
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            animation: pop 0.5s ease;
+        }
+
+        .completion-icon {
+            font-size: 70px;
+
+            margin-bottom: 15px;
+        }
+
+        .completion-box h2 {
+            margin-bottom: 10px;
+        }
+
+        .completion-box p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .close-btn {
+            border: none;
+
+            padding: 12px 22px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 45px 7% 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr;
+
+            gap: 35px;
+
+            margin-bottom: 25px;
+        }
+
+        footer h3 {
+            margin-bottom: 12px;
+        }
+
+        footer p,
+        footer a {
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            line-height: 2;
+        }
+
+        .footer-bottom {
+            border-top:
+                1px solid #374151;
+
+            padding-top: 18px;
+
+            text-align: center;
+
+            color: #9ca3af;
+        }
+
+        /* ANIMATION */
+
+        @keyframes fadeDown {
+
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes pop {
+
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 700px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .lesson-top h1 {
+                font-size: 30px;
+            }
+
+            .lesson-content {
+                padding: 25px;
+            }
+
+            .lesson-navigation {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        Smart<span>Learn</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="courses.html">
+            Courses
+        </a>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="profile.html">
+            Profile
+        </a>
+
+        <a
+            href="login.html"
+            class="login-btn"
+        >
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- PAGE -->
+
+<div class="page">
+
+
+    <!-- LESSON HEADER -->
+
+    <div class="lesson-top">
+
+        <div
+            class="course-name"
+            id="courseName"
+        >
+            SmartLearn Course
+        </div>
+
+        <h1 id="lessonTitle">
+            Loading Lesson...
+        </h1>
+
+        <p id="lessonDescription">
+            Please wait...
+        </p>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-card">
+
+        <div class="progress-header">
+
+            <span>
+                Course Progress
+            </span>
+
+            <strong id="progressPercent">
+                0%
+            </strong>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="progressFill"
+                style="width:0%"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LESSON CONTENT -->
+
+    <div class="lesson-content">
+
+        <h2>
+            📖 Lesson Content
+        </h2>
+
+        <div id="lessonBody">
+
+            <p>
+                Loading lesson content...
+            </p>
+
+        </div>
+
+
+        <!-- COMPLETE -->
+
+        <div class="complete-area">
+
+            <button
+                class="complete-btn"
+                id="completeBtn"
+                onclick="completeLesson()"
+            >
+                ✓ Mark as Complete
+            </button>
+
+            <div
+                class="message"
+                id="message"
+            ></div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="lesson-navigation">
+
+            <button
+                class="nav-btn prev-btn"
+                id="prevBtn"
+                onclick="previousLesson()"
+            >
+                ← Previous Lesson
+            </button>
+
+            <button
+                class="nav-btn next-btn"
+                id="nextBtn"
+                onclick="nextLesson()"
+            >
+                Next Lesson →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- COMPLETION POPUP -->
+
+<div
+    class="completion-screen"
+    id="completionScreen"
+>
+
+    <div class="completion-box">
+
+        <div class="completion-icon">
+            🎉
+        </div>
+
+        <h2>
+            Lesson Completed!
+        </h2>
+
+        <p id="completionText">
+            Great job! Keep learning.
+        </p>
+
+        <button
+            class="close-btn"
+            onclick="closeCompletion()"
+        >
+            Continue Learning
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3>
+                SmartLearn
+            </h3>
+
+            <p>
+                Learn smarter, practice better
+                and achieve your goals.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Platform
+            </h3>
+
+            <p>
+                <a href="courses.html">
+                    Courses
+                </a>
+            </p>
+
+            <p>
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Learning
+            </h3>
+
+            <p>
+                <a href="quiz.html">
+                    Quiz
+                </a>
+            </p>
+
+            <p>
+                <a href="ai-tutor.html">
+                    AI Tutor
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 SmartLearn. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    /* =========================
+       LOGIN PROTECTION
+    ========================== */
+
+    const currentUser =
+        localStorage.getItem(
+            "currentUser"
+        );
+
+
+    if (!currentUser) {
+
+        alert(
+            "Please login first to access this lesson."
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* =========================
+       SELECTED COURSE
+    ========================== */
+
+    let selectedCourse =
+        JSON.parse(
+            localStorage.getItem(
+                "selectedCourse"
+            )
+        );
+
+
+    if (!selectedCourse) {
+
+        selectedCourse = {
+
+            id: "html-css",
+
+            title: "HTML & CSS",
+
+            description:
+                "Learn the fundamentals of web development.",
+
+            icon: "💻"
+
+        };
+
+    }
+
+
+    const courseId =
+        selectedCourse.id;
+
+
+    /* =========================
+       SELECTED LESSON
+    ========================== */
+
+    let selectedLesson =
+        JSON.parse(
+            localStorage.getItem(
+                "selectedLesson"
+            )
+        );
+
+
+    let lessonIndex = 0;
+
+
+    if (
+        selectedLesson &&
+        selectedLesson.courseId === courseId
+    ) {
+
+        lessonIndex =
+            Number(
+                selectedLesson.lessonIndex
+            ) || 0;
+
+    }
+
+
+    /* =========================
+       LOAD LESSONS
+    ========================== */
+
+    const storedLessons =
+        JSON.parse(
+            localStorage.getItem(
+                "smartLearnLessons"
+            )
+        ) || {};
+
+
+    let lessons = [];
+
+
+    if (
+        Array.isArray(
+            storedLessons[courseId]
+        )
+    ) {
+
+        lessons =
+            storedLessons[courseId];
+
+    } else if (
+        Array.isArray(storedLessons)
+    ) {
+
+        lessons =
+            storedLessons.filter(
+                lesson =>
+                    String(
+                        lesson.courseId
+                    ) ===
+                    String(courseId)
+            );
+
+    }
+
+
+    /*
+       FALLBACK LESSONS
+    */
+
+    if (lessons.length === 0) {
+
+        lessons = [
+
+            {
+                id: "lesson-1",
+
+                title:
+                    "Introduction",
+
+                description:
+                    "Introduction to the course.",
+
+                content:
+                    "Welcome to this SmartLearn course. In this lesson you will learn the basic ideas and understand what you will study throughout the course."
+            },
+
+            {
+                id: "lesson-2",
+
+                title:
+                    "Getting Started",
+
+                description:
+                    "Learn the basic concepts.",
+
+                content:
+                    "This lesson introduces the basic concepts you need before moving to more advanced topics."
+            },
+
+            {
+                id: "lesson-3",
+
+                title:
+                    "Core Concepts",
+
+                description:
+                    "Understand the important concepts.",
+
+                content:
+                    "Now you will explore the important concepts of this course and prepare yourself for practical learning."
+            }
+
+        ];
+
+    }
+
+
+    /* =========================
+       FIX INDEX
+    ========================== */
+
+    if (
+        lessonIndex < 0 ||
+        lessonIndex >= lessons.length
+    ) {
+
+        lessonIndex = 0;
+
+    }
+
+
+    /* =========================
+       PROGRESS DATA
+    ========================== */
+
+    let progressData =
+        JSON.parse(
+            localStorage.getItem(
+                "courseProgressData"
+            )
+        ) || {};
+
+
+    let courseData =
+        progressData[courseId] || {};
+
+
+    let completedLessons =
+        Array.isArray(
+            courseData.completedLessons
+        )
+            ? courseData.completedLessons
+            : [];
+
+
+    /* =========================
+       CURRENT LESSON
+    ========================== */
+
+    function currentLesson() {
+
+        return lessons[lessonIndex];
+
+    }
+
+
+    /* =========================
+       DISPLAY LESSON
+    ========================== */
+
+    function displayLesson() {
+
+        const lesson =
+            currentLesson();
+
+
+        if (!lesson) {
+            return;
+        }
+
+
+        document.getElementById(
+            "courseName"
+        ).textContent =
+            selectedCourse.title ||
+            "SmartLearn Course";
+
+
+        document.getElementById(
+            "lessonTitle"
+        ).textContent =
+            lesson.title ||
+            "Lesson " +
+            (lessonIndex + 1);
+
+
+        document.getElementById(
+            "lessonDescription"
+        ).textContent =
+            lesson.description ||
+            "Learn this lesson step-by-step.";
+
+
+        /*
+           CONTENT
+        */
+
+        const body =
+            document.getElementById(
+                "lessonBody"
+            );
+
+
+        if (lesson.content) {
+
+            body.innerHTML =
+                formatContent(
+                    lesson.content
+                );
+
+        } else {
+
+            body.innerHTML = `
+
+                <p>
+                    Welcome to
+                    <strong>
+                        ${lesson.title || "this lesson"}
+                    </strong>.
+                </p>
+
+                <p>
+                    This lesson is part of
+                    the ${selectedCourse.title}
+                    course.
+                </p>
+
+                <div class="info-box">
+
+                    <p>
+                        💡 Read this lesson carefully
+                        and then mark it as complete.
+                    </p>
+
+                </div>
+
+                <h3>
+                    What You Will Learn
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Understand the basic concepts
+                    </li>
+
+                    <li>
+                        Practice what you learn
+                    </li>
+
+                    <li>
+                        Prepare for the course quiz
+                    </li>
+
+                </ul>
+
+            `;
+
+        }
+
+
+        updateProgress();
+
+
+        updateButtons();
+
+
+        updateCompleteButton();
+
+    }
+
+
+    /* =========================
+       FORMAT CONTENT
+    ========================== */
+
+    function formatContent(content) {
+
+        return String(content)
+            .split("\n")
+            .map(
+                line =>
+                    line.trim()
+                        ? `<p>${line}</p>`
+                        : ""
+            )
+            .join("");
+
+    }
+
+
+    /* =========================
+       UPDATE PROGRESS
+    ========================== */
+
+    function updateProgress() {
+
+        const total =
+            lessons.length;
+
+        const completed =
+            completedLessons.length;
+
+
+        const percent =
+            total > 0
+                ? Math.round(
+                    (completed / total) *
+                    100
+                )
+                : 0;
+
+
+        progressData[courseId] = {
+
+            completedLessons:
+                completedLessons,
+
+            progress:
+                percent
+
+        };
+
+
+        localStorage.setItem(
+            "courseProgressData",
+            JSON.stringify(
+                progressData
+            )
+        );
+
+
+        document.getElementById(
+            "progressPercent"
+        ).textContent =
+            percent + "%";
+
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            percent + "%";
+
+
+        /*
+           Legacy support
+        */
+
+        localStorage.setItem(
+            "courseProgress",
+            String(percent)
+        );
+
+    }
+
+
+    /* =========================
+       COMPLETE LESSON
+    ========================== */
+
+    function completeLesson() {
+
+        const lesson =
+            currentLesson();
+
+
+        const lessonId =
+            String(
+                lesson.id ||
+                lessonIndex
+            );
+
+
+        if (
+            !completedLessons.includes(
+                lessonId
+            )
+        ) {
+
+            completedLessons.push(
+                lessonId
+            );
+
+
+            progressData[courseId] = {
+
+                completedLessons:
+                    completedLessons,
+
+                progress:
+                    Math.round(
+                        (
+                            completedLessons.length /
+                            lessons.length
+                        ) * 100
+                    )
+
+            };
+
+
+            localStorage.setItem(
+                "courseProgressData",
+                JSON.stringify(
+                    progressData
+                )
+            );
+
+
+            updateProgress();
+
+
+            updateCompleteButton();
+
+
+            showCompletion();
+
+        } else {
+
+            showMessage(
+                "This lesson is already completed.",
+                "success"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       COMPLETE BUTTON
+    ========================== */
+
+    function updateCompleteButton() {
+
+        const lesson =
+            currentLesson();
+
+
+        const lessonId =
+            String(
+                lesson.id ||
+                lessonIndex
+            );
+
+
+        const button =
+            document.getElementById(
+                "completeBtn"
+            );
+
+
+        if (
+            completedLessons.includes(
+                lessonId
+            )
+        ) {
+
+            button.textContent =
+                "✓ Lesson Completed";
+
+            button.classList.add(
+                "completed"
+            );
+
+        } else {
+
+            button.textContent =
+                "✓ Mark as Complete";
+
+            button.classList.remove(
+                "completed"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       PREVIOUS
+    ========================== */
+
+    function previousLesson() {
+
+        if (
+            lessonIndex <= 0
+        ) {
+
+            return;
+
+        }
+
+
+        lessonIndex--;
+
+
+        saveSelectedLesson();
+
+
+        displayLesson();
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       NEXT
+    ========================== */
+
+    function nextLesson() {
+
+        if (
+            lessonIndex >=
+            lessons.length - 1
+        ) {
+
+            const progress =
+                progressData[courseId] || {};
+
+
+            if (
+                (progress.progress || 0) >= 100
+            ) {
+
+                alert(
+                    "🎉 Congratulations! You completed this course."
+                );
+
+                window.location.href =
+                    "course-details.html";
+
+                return;
+
+            }
+
+
+            showMessage(
+                "Complete this lesson and all remaining lessons first.",
+                "success"
+            );
+
+            return;
+
+        }
+
+
+        lessonIndex++;
+
+
+        saveSelectedLesson();
+
+
+        displayLesson();
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       SAVE LESSON
+    ========================== */
+
+    function saveSelectedLesson() {
+
+        localStorage.setItem(
+
+            "selectedLesson",
+
+            JSON.stringify({
+
+                courseId:
+                    courseId,
+
+                lessonIndex:
+                    lessonIndex
+
+            })
+
+        );
+
+    }
+
+
+    /* =========================
+       BUTTON STATE
+    ========================== */
+
+    function updateButtons() {
+
+        const prev =
+            document.getElementById(
+                "prevBtn"
+            );
+
+
+        const next =
+            document.getElementById(
+                "nextBtn"
+            );
+
+
+        prev.disabled =
+            lessonIndex === 0;
+
+
+        if (
+            lessonIndex ===
+            lessons.length - 1
+        ) {
+
+            next.textContent =
+                "Finish Course →";
+
+        } else {
+
+            next.textContent =
+                "Next Lesson →";
+
+        }
+
+    }
+
+
+    /* =========================
+       COMPLETION POPUP
+    ========================== */
+
+    function showCompletion() {
+
+        const progress =
+            progressData[courseId] || {};
+
+
+        const percent =
+            progress.progress || 0;
+
+
+        document.getElementById(
+            "completionText"
+        ).textContent =
+            `Great job! Your course progress is now ${percent}%. Keep going!`;
+
+
+        document.getElementById(
+            "completionScreen"
+        ).style.display =
+            "flex";
+
+    }
+
+
+    function closeCompletion() {
+
+        document.getElementById(
+            "completionScreen"
+        ).style.display =
+            "none";
+
+
+        /*
+           Automatically go next
+           if available
+        */
+
+        if (
+            lessonIndex <
+            lessons.length - 1
+        ) {
+
+            nextLesson();
+
+        } else {
+
+            updateButtons();
+
+        }
+
+    }
+
+
+    /* =========================
+       MESSAGE
+    ========================== */
+
+    function showMessage(
+        text,
+        type
+    ) {
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        message.textContent =
+            text;
+
+
+        message.className =
+            "message " + type;
+
+
+        setTimeout(
+            () => {
+
+                message.className =
+                    "message";
+
+            },
+            3000
+        );
+
+    }
+
+
+    /* =========================
+       INITIALIZE
+    ========================== */
+
+    saveSelectedLesson();
+
+    displayLesson();
+
+</script>
+
+
+</body>
+
+</html>

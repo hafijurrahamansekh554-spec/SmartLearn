@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SmartLearn - Certificate</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: #172033;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      height: 70px;
+      background: rgba(255,255,255,0.96);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #4f46e5;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: #4f46e5;
+    }
+
+    /* PAGE */
+
+    .page {
+      width: 92%;
+      max-width: 1100px;
+      margin: 45px auto;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .page-title h1 {
+      font-size: 38px;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+
+    .page-title p {
+      color: #6b7280;
+    }
+
+    /* CERTIFICATE */
+
+    .certificate {
+      background: white;
+      min-height: 650px;
+      padding: 55px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+
+      border: 12px solid #4f46e5;
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.15);
+
+      text-align: center;
+    }
+
+    .certificate::before {
+      content: "";
+      position: absolute;
+      inset: 15px;
+
+      border: 3px solid #c7d2fe;
+      border-radius: 10px;
+
+      pointer-events: none;
+    }
+
+    .certificate-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .certificate-logo {
+      font-size: 30px;
+      font-weight: bold;
+      color: #4f46e5;
+      margin-bottom: 25px;
+    }
+
+    .certificate h2 {
+      font-size: 20px;
+      color: #6b7280;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .certificate h1 {
+      font-size: 48px;
+      color: #111827;
+      margin-bottom: 15px;
+    }
+
+    .presented {
+      color: #6b7280;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .student-name {
+      font-size: 40px;
+      font-weight: bold;
+      color: #4f46e5;
+      margin: 10px 0 25px;
+      border-bottom: 2px solid #c7d2fe;
+      display: inline-block;
+      padding: 0 35px 8px;
+    }
+
+    .course-text {
+      font-size: 18px;
+      color: #4b5563;
+      margin-bottom: 10px;
+    }
+
+    .course-name {
+      font-size: 32px;
+      font-weight: bold;
+      color: #111827;
+      margin-bottom: 30px;
+    }
+
+    /* SCORE */
+
+    .score-box {
+      display: inline-flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 30px;
+      border-radius: 15px;
+      background: #eef2ff;
+      margin-bottom: 35px;
+    }
+
+    .score-item {
+      text-align: center;
+    }
+
+    .score-item strong {
+      display: block;
+      font-size: 24px;
+      color: #4f46e5;
+    }
+
+    .score-item span {
+      font-size: 12px;
+      color: #6b7280;
+      text-transform: uppercase;
+    }
+
+    /* BOTTOM */
+
+    .certificate-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 30px 50px 0;
+    }
+
+    .date-box,
+    .id-box {
+      text-align: center;
+      min-width: 180px;
+    }
+
+    .line {
+      width: 180px;
+      border-top: 2px solid #374151;
+      margin-bottom: 7px;
+    }
+
+    .bottom-label {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .certificate-id {
+      font-weight: bold;
+      color: #374151;
+      margin-top: 5px;
+    }
+
+    .seal {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 5px double #4f46e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4f46e5;
+      font-weight: bold;
+      font-size: 12px;
+      transform: rotate(-10deg);
+    }
+
+    /* BUTTONS */
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .print-btn {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+    }
+
+    .dashboard-btn {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .actions button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* LOCK */
+
+    .locked {
+      display: none;
+      background: white;
+      padding: 60px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+    }
+
+    .lock-icon {
+      font-size: 65px;
+      margin-bottom: 20px;
+    }
+
+    .locked h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .locked p {
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    .back-btn {
+      border: none;
+      background: #4f46e5;
+      color: white;
+      padding: 13px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ANIMATION */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* PRINT */
+
+    @media print {
+
+      body {
+        background: white;
+      }
+
+      nav,
+      .page-title,
+      .actions {
+        display: none !important;
+      }
+
+      .page {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+      }
+
+      .certificate {
+        box-shadow: none;
+        border: 12px solid #4f46e5;
+        min-height: 700px;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:700px) {
+
+      nav {
+        padding: 0 5%;
+      }
+
+      .nav-links {
+        gap: 10px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+      }
+
+      .page {
+        width: 95%;
+        margin: 30px auto;
+      }
+
+      .certificate {
+        padding: 35px 20px;
+        border-width: 8px;
+      }
+
+      .certificate h1 {
+        font-size: 34px;
+      }
+
+      .student-name {
+        font-size: 28px;
+        padding: 0 15px 8px;
+      }
+
+      .course-name {
+        font-size: 24px;
+      }
+
+      .score-box {
+        gap: 15px;
+        padding: 12px 18px;
+      }
+
+      .certificate-bottom {
+        margin: 20px 5px 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+      }
+
+      .seal {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      SmartLearn
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+
+  </nav>
+
+
+  <div class="page">
+
+    <div class="page-title">
+
+      <h1>Your Certificate</h1>
+
+      <p>
+        Congratulations on completing your learning journey.
+      </p>
+
+    </div>
+
+
+    <!-- LOCKED MESSAGE -->
+
+    <div class="locked" id="locked">
+
+      <div class="lock-icon">
+        🔒
+      </div>
+
+      <h2>Certificate Locked</h2>
+
+      <p id="lockMessage">
+        Complete the course lessons to unlock your certificate.
+      </p>
+
+      <button
+        class="back-btn"
+        onclick="goDashboard()">
+
+        Go to Dashboard
+
+      </button>
+
+    </div>
+
+
+    <!-- CERTIFICATE -->
+
+    <div class="certificate" id="certificate">
+
+      <div class="certificate-content">
+
+        <div class="certificate-logo">
+          SmartLearn
+        </div>
+
+        <h2>
+          Certificate of Completion
+        </h2>
+
+        <h1>
+          Certificate
+        </h1>
+
+        <p class="presented">
+          This certificate is proudly presented to
+        </p>
+
+
+        <div
+          class="student-name"
+          id="studentName">
+
+          Student
+
+        </div>
+
+
+        <p class="course-text">
+          for successfully completing the course
+        </p>
+
+
+        <div
+          class="course-name"
+          id="courseName">
+
+          Course Name
+
+        </div>
+
+
+        <!-- SCORE -->
+
+        <div class="score-box">
+
+          <div class="score-item">
+
+            <strong id="quizScore">
+              0
+            </strong>
+
+            <span>
+              Quiz Score
+            </span>
+
+          </div>
+
+
+          <div class="score-item">
+
+            <strong id="quizPercentage">
+              0%
+            </strong>
+
+            <span>
+              Percentage
+            </span>
+
+          </div>
+
+
+          <div class="score-item">
+
+            <strong>
+              100%
+            </strong>
+
+            <span>
+              Course Progress
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- BOTTOM -->
+
+        <div class="certificate-bottom">
+
+          <div class="date-box">
+
+            <div class="line"></div>
+
+            <div
+              class="bottom-label">
+
+              Date
+
+            </div>
+
+            <div
+              id="certificateDate">
+
+              -
+
+            </div>
+
+          </div>
+
+
+          <div class="seal">
+
+            SMART<br>
+            LEARN<br>
+            VERIFIED
+
+          </div>
+
+
+          <div class="id-box">
+
+            <div class="line"></div>
+
+            <div class="bottom-label">
+
+              Certificate ID
+
+            </div>
+
+            <div
+              class="certificate-id"
+              id="certificateId">
+
+              -
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div
+      class="actions"
+      id="actions">
+
+      <button
+        class="print-btn"
+        onclick="printCertificate()">
+
+        🖨 Print Certificate
+
+      </button>
+
+      <button
+        class="dashboard-btn"
+        onclick="goDashboard()">
+
+        ← Dashboard
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+  /* ==============================
+     LOGIN CHECK
+  ============================== */
+
+  const currentUser =
+    JSON.parse(
+      localStorage.getItem("currentUser")
+    );
+
+
+  if (!currentUser) {
+
+    alert(
+      "Please login to view your certificate."
+    );
+
+    window.location.href =
+      "login.html";
+
+  }
+
+
+  /* ==============================
+     SELECTED COURSE
+  ============================== */
+
+  const selectedCourse =
+    JSON.parse(
+      localStorage.getItem("selectedCourse")
+    ) || {
+
+      id: "html-css",
+
+      title: "HTML & CSS"
+
+    };
+
+
+  /* ==============================
+     USER NAME
+  ============================== */
+
+  let studentName =
+    "SmartLearn Student";
+
+
+  if (currentUser) {
+
+    studentName =
+      currentUser.name ||
+      currentUser.username ||
+      currentUser.email ||
+      "SmartLearn Student";
+
+  }
+
+
+  /* ==============================
+     COURSE PROGRESS
+  ============================== */
+
+  const courseProgressData =
+    JSON.parse(
+      localStorage.getItem("courseProgressData")
+    ) || {};
+
+
+  const courseProgress =
+    courseProgressData[selectedCourse.id] || {
+
+      completedLessons: 0,
+
+      progress: 0
+
+    };
+
+
+  /* ==============================
+     QUIZ SCORE
+  ============================== */
+
+  const quizScores =
+    JSON.parse(
+      localStorage.getItem("quizScores")
+    ) || {};
+
+
+  const quizData =
+    quizScores[selectedCourse.id] || {
+
+      score: 0,
+
+      total: 0,
+
+      percentage: 0
+
+    };
+
+
+  /* ==============================
+     CHECK COMPLETION
+  ============================== */
+
+  const progress =
+    Number(courseProgress.progress) || 0;
+
+
+  if (progress < 100) {
+
+    document.getElementById("certificate")
+      .style.display = "none";
+
+    document.getElementById("actions")
+      .style.display = "none";
+
+    document.getElementById("locked")
+      .style.display = "block";
+
+
+    document.getElementById("lockMessage")
+      .textContent =
+      `Complete 100% of the course lessons first. Current progress: ${progress}%.`;
+
+  }
+
+
+  /* ==============================
+     SHOW CERTIFICATE
+  ============================== */
+
+  else {
+
+    document.getElementById("studentName")
+      .textContent =
+      studentName;
+
+
+    document.getElementById("courseName")
+      .textContent =
+      selectedCourse.title;
+
+
+    document.getElementById("quizScore")
+      .textContent =
+      `${quizData.score}/${quizData.total}`;
+
+
+    document.getElementById("quizPercentage")
+      .textContent =
+      `${quizData.percentage}%`;
+
+
+    /* DATE */
+
+    const today =
+      new Date();
+
+
+    const formattedDate =
+      today.toLocaleDateString(
+        "en-IN",
+        {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        }
+      );
+
+
+    document.getElementById("certificateDate")
+      .textContent =
+      formattedDate;
+
+
+    /* CERTIFICATE ID */
+
+    let certificateId =
+      localStorage.getItem(
+        "certificateId_" + selectedCourse.id
+      );
+
+
+    if (!certificateId) {
+
+      const randomNumber =
+        Math.floor(
+          100000 + Math.random() * 900000
+        );
+
+
+      certificateId =
+        "SL-" +
+        selectedCourse.id
+          .toString()
+          .substring(0, 4)
+          .toUpperCase() +
+        "-" +
+        randomNumber;
+
+
+      localStorage.setItem(
+        "certificateId_" + selectedCourse.id,
+        certificateId
+      );
+
+    }
+
+
+    document.getElementById("certificateId")
+      .textContent =
+      certificateId;
+
+  }
+
+
+  /* ==============================
+     PRINT
+  ============================== */
+
+  function printCertificate() {
+
+    window.print();
+
+  }
+
+
+  /* ==============================
+     DASHBOARD
+  ============================== */
+
+  function goDashboard() {
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+
+</script>
+
+</body>
+</html>
